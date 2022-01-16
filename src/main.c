@@ -29,13 +29,14 @@ void thread1(void)
 		printk("Thread 1\n");
 		//printk("SleepTime = %d\n", sleepTime);
 		
-		k_msleep(sleepTime);
+		
 		sleepTime = sleepTime+1000;
 		if(sleepTime>10000)			//Reset time after 10 seconds
 		{
 			sleepTime=1000;
 		}
 		k_fifo_put(&printk_fifo, &message);
+		k_msleep(sleepTime);
 		
 	}
 }
@@ -45,6 +46,7 @@ void thread2(void)
 	while(1)
 	{
 		int *receivedMessage = k_fifo_get(&printk_fifo, K_FOREVER);
+		k_msleep(1000);
 		//printk("%d\n", *receivedMessage);
 		printk("Thread 2\n");
 	}
@@ -54,4 +56,3 @@ K_THREAD_DEFINE(thread1_id, STACKSIZE, thread1, NULL, NULL, NULL,
 		PRIORITY, 0, 0);
 K_THREAD_DEFINE(thread2_id, STACKSIZE, thread2, NULL, NULL, NULL,
 		PRIORITY, 0, 0);
-
