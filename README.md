@@ -24,4 +24,5 @@
 * When the time period reaches 10 seconds, the time period resets itself
 * Thread 1 also passes a message to fifo buffer after its execution.
 * Thread ideally waits for the message from thread 1.
-* If thread 2 receives message from thread 1, it prints `Thread 2`
+* If thread 2 receives message from thread 1, it prints `Thread 2` after 1 second of receiving message from thread 1
+* Press `Ctrl+c` to exit
